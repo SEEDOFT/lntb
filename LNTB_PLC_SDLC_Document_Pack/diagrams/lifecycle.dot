@@ -1,0 +1,17 @@
+digraph G {
+  graph [rankdir=LR, bgcolor="white", pad=0.25, nodesep=0.35, ranksep=0.6, fontname="Arial"];
+  node [shape=box, style="rounded,filled", fontname="Arial", fontsize=10, color="#1B5E20", fillcolor="#E8F5E9", margin="0.13,0.08"];
+  edge [fontname="Arial", fontsize=8.5, color="#33691E", arrowsize=0.8];
+  initiate [label="PLC 1\nInitiate\nCharter · Business Case"];
+  plan [label="PLC 2\nPlan\nScope · Schedule · Risk"];
+  analyze [label="SDLC 1\nAnalyze\nSRS · Use Cases"];
+  design [label="SDLC 2\nDesign\nArchitecture · UX · Data"];
+  build [label="SDLC 3\nBuild\nBackend · App · Firmware"];
+  verify [label="SDLC 4\nVerify\nTest · Field Calibration"];
+  release [label="SDLC 5\nRelease\nDeploy · Train · Pilot"];
+  operate [label="PLC/SDLC\nOperate & Improve\nSupport · Benefits"];
+  close [label="PLC 5\nClose\nAcceptance · Handover"];
+  initiate -> plan -> analyze -> design -> build -> verify -> release -> operate -> close;
+  verify -> design [label="defect / learning", style=dashed, color="#EF6C00"];
+  operate -> analyze [label="change request", style=dashed, color="#1565C0"];
+}

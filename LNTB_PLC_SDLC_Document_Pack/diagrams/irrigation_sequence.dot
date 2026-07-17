@@ -1,0 +1,19 @@
+digraph G {
+  graph [rankdir=LR, bgcolor="white", pad=0.25, nodesep=0.45, ranksep=0.6, fontname="Arial"];
+  node [shape=box, style="rounded,filled", fontname="Arial", fontsize=10, fillcolor="#F7FBF8", color="#2F6B4F", margin="0.12,0.07"];
+  edge [fontname="Arial", fontsize=8.5, color="#4D665A", arrowsize=0.75];
+
+  read [label="1. Read sensors\nValidate ranges"];
+  local [label="2. Apply local safety\nDry threshold + timeout"];
+  upload [label="3. Upload reading\nIdempotency key"];
+  decide [label="4. Backend evaluates\nFarm threshold + mode"];
+  queue [label="5. Queue pump command\nWith expiry + max duration"];
+  poll [label="6. Device polls\nAuthenticates command"];
+  run [label="7. Pump starts\nMeasure flow + energy"];
+  stop [label="8. Stop on target / timeout\nFail-safe relay off"];
+  ack [label="9. Acknowledge event\nActual volume + kWh"];
+  notify [label="10. Update dashboard\nLogbook + alerts"];
+
+  read -> local -> upload -> decide -> queue -> poll -> run -> stop -> ack -> notify;
+  local -> run [label="backend unavailable\nlocal fallback", style=dashed, color="#C62828"];
+}

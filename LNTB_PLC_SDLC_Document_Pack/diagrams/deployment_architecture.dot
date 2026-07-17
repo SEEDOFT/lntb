@@ -1,0 +1,50 @@
+digraph G {
+  graph [rankdir=TB, bgcolor="white", pad=0.25, nodesep=0.4, ranksep=0.55, fontname="Arial", compound=true];
+  node [shape=box, style="rounded,filled", fontname="Arial", fontsize=10, color="#315B4A", fillcolor="#EEF7F2", margin="0.12,0.07"];
+  edge [fontname="Arial", fontsize=8.5, color="#526D62", arrowsize=0.75];
+
+  subgraph cluster_farm {
+    label="Net House / Farm Site"; color="#81C784"; style="rounded,dashed"; fontname="Arial";
+    sensor [label="ESP32 Sensor Node\nLocal fallback rules\n24-hour offline buffer"];
+    cam [label="ESP32-CAM\nJPEG capture"];
+    actuators [label="Pump · Fan · Servo\nRelay + safety cutoff"];
+    sensors [label="Soil · DHT22 · LDR\nFlow Meter · Energy Meter"];
+    router [label="Wi-Fi Router / Hotspot"];
+    sensors -> sensor;
+    sensor -> actuators;
+    sensor -> router;
+    cam -> router;
+  }
+
+  subgraph cluster_cloud {
+    label="Pilot Cloud / Server"; color="#64B5F6"; style="rounded,dashed"; fontname="Arial";
+    proxy [label="TLS Reverse Proxy\nHTTPS / WSS"];
+    app [label="Laravel Application\nAPI + Reverb"];
+    worker [label="Queue Worker\nNotifications + AI jobs"];
+    scheduler [label="Scheduler\nDaily rollups + health checks"];
+    mysql [shape=cylinder, label="MySQL"];
+    media [shape=folder, label="Private Media Storage"];
+    ai [label="AI Model Runtime"];
+    backup [shape=folder, label="Encrypted Backup"];
+    proxy -> app;
+    app -> worker;
+    app -> scheduler;
+    app -> mysql;
+    worker -> mysql;
+    worker -> media;
+    worker -> ai;
+    mysql -> backup [label="daily"];
+    media -> backup [label="daily / policy"];
+  }
+
+  subgraph cluster_mobile {
+    label="Farmer Device"; color="#FFB74D"; style="rounded,dashed"; fontname="Arial";
+    mobile [label="Flutter Android App\nKhmer UI · local cache"];
+    fcm [label="FCM Client"];
+  }
+
+  router -> proxy [label="Internet: HTTPS"];
+  mobile -> proxy [label="HTTPS / WSS"];
+  worker -> fcm [label="FCM service"];
+  fcm -> mobile [label="push"];
+}

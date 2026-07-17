@@ -1,0 +1,6 @@
+[submodule "lntb-api"]
+	path = lntb-api
+	url = ./lntb-api
+[submodule "lntb_app"]
+	path = lntb_app
+	url = ./lntb_app
