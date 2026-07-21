@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>Confetti</title>
+  <path d="M18 44L27 29L38 38L23 51L18 44Z" fill="#F59E0B"/><path d="M27 29L39 17" stroke="#2563EB" stroke-width="4"/><path d="M38 15L42 8M44 22L54 18M40 30L50 36" stroke="#EF4444" stroke-width="4" stroke-linecap="round"/><circle cx="14" cy="20" r="3" fill="#16A34A"/><circle cx="51" cy="10" r="3" fill="#0EA5E9"/>
+</svg>

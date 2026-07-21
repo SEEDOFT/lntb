@@ -1,0 +1,50 @@
+{
+  "colors": {
+    "primary_dark": "#1E3A8A",
+    "primary": "#2563EB",
+    "success": "#16A34A",
+    "accent": "#84CC16",
+    "sky": "#0EA5E9",
+    "surface": "#F1F5F9",
+    "text": "#334155",
+    "warning": "#F59E0B",
+    "error": "#EF4444",
+    "white": "#FFFFFF"
+  },
+  "typography": {
+    "latin": {
+      "family": "Poppins",
+      "weights": [
+        400,
+        500,
+        600,
+        700
+      ]
+    },
+    "khmer": {
+      "family": "Khmer OS Battambang",
+      "weights": [
+        400,
+        500,
+        700
+      ]
+    }
+  },
+  "radius": {
+    "small": 8,
+    "medium": 12,
+    "large": 16,
+    "pill": 999
+  },
+  "spacing": [
+    4,
+    8,
+    12,
+    16,
+    20,
+    24,
+    32,
+    40,
+    48
+  ]
+}

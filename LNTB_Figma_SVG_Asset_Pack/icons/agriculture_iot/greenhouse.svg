@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>Greenhouse</title>
+  
+  <path d="M9 30L32 10L55 30V55H9V30Z" fill="none" stroke="#16A34A" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M18 55V31L32 17L46 31V55M32 17V55M9 31H55" fill="none" stroke="#16A34A" stroke-width="3"/>
+  <path d="M24 48C20 39 26 34 31 32C35 38 33 44 28 48M40 48C44 39 38 34 33 32" fill="#84CC16"/>
+
+</svg>

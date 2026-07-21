@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>Camera</title>
+  
+  <rect x="10" y="18" width="44" height="28" rx="7" fill="#CBD5E1" stroke="#334155" stroke-width="3"/>
+  <circle cx="32" cy="32" r="10" fill="#1E3A8A"/>
+  <circle cx="32" cy="32" r="5" fill="#0EA5E9"/>
+  <path d="M24 46V54M40 46V54M18 56H46" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+  <rect x="44" y="22" width="6" height="5" rx="2" fill="#16A34A"/>
+
+</svg>

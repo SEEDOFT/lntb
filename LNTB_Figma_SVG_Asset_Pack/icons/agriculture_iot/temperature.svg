@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>Temperature</title>
+  
+  <rect x="25" y="8" width="14" height="34" rx="7" fill="#FFFFFF" stroke="#2563EB" stroke-width="4"/>
+  <circle cx="32" cy="47" r="10" fill="#EF4444" stroke="#2563EB" stroke-width="4"/>
+  <path d="M32 18V46" stroke="#EF4444" stroke-width="6" stroke-linecap="round"/>
+  <path d="M43 16H50M43 25H47M43 34H50" stroke="#334155" stroke-width="3" stroke-linecap="round"/>
+
+</svg>

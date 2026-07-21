@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>Solar</title>
+  
+  <path d="M15 14H50L45 39H10L15 14Z" fill="#2563EB" stroke="#1E3A8A" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M23 14L19 39M34 14L31 39M44 14L42 39M12 26H48" stroke="#93C5FD" stroke-width="2"/>
+  <path d="M29 40V52M20 55H42" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+
+</svg>

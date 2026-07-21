@@ -1,0 +1,346 @@
+[
+  {
+    "name": "splash_background",
+    "svg": "backgrounds/splash_background.svg",
+    "png": "backgrounds/splash_background.png",
+    "width": 456,
+    "height": 413,
+    "type": "raster-backed-svg"
+  },
+  {
+    "name": "onboarding_background",
+    "svg": "backgrounds/onboarding_background.svg",
+    "png": "backgrounds/onboarding_background.png",
+    "width": 591,
+    "height": 255,
+    "type": "raster-backed-svg"
+  },
+  {
+    "name": "lntb_logo_lockup",
+    "svg": "illustrations/lntb_logo_lockup.svg",
+    "png": "illustrations/lntb_logo_lockup.png",
+    "width": 217,
+    "height": 140,
+    "type": "raster-backed-svg"
+  },
+  {
+    "name": "onboarding_step_1_farmer",
+    "svg": "illustrations/onboarding_step_1_farmer.svg",
+    "png": "illustrations/onboarding_step_1_farmer.png",
+    "width": 153,
+    "height": 198,
+    "type": "raster-backed-svg"
+  },
+  {
+    "name": "onboarding_step_2_devices",
+    "svg": "illustrations/onboarding_step_2_devices.svg",
+    "png": "illustrations/onboarding_step_2_devices.png",
+    "width": 140,
+    "height": 198,
+    "type": "raster-backed-svg"
+  },
+  {
+    "name": "onboarding_step_3_mobile",
+    "svg": "illustrations/onboarding_step_3_mobile.svg",
+    "png": "illustrations/onboarding_step_3_mobile.png",
+    "width": 139,
+    "height": 198,
+    "type": "raster-backed-svg"
+  },
+  {
+    "name": "onboarding_step_4_growth",
+    "svg": "illustrations/onboarding_step_4_growth.svg",
+    "png": "illustrations/onboarding_step_4_growth.png",
+    "width": 140,
+    "height": 198,
+    "type": "raster-backed-svg"
+  },
+  {
+    "name": "greenhouse",
+    "svg": "illustrations/greenhouse.svg",
+    "png": "illustrations/greenhouse.png",
+    "width": 232,
+    "height": 163,
+    "type": "raster-backed-svg"
+  },
+  {
+    "name": "solar_panel",
+    "svg": "illustrations/solar_panel.svg",
+    "png": "illustrations/solar_panel.png",
+    "width": 135,
+    "height": 163,
+    "type": "raster-backed-svg"
+  },
+  {
+    "name": "iot_controller",
+    "svg": "illustrations/iot_controller.svg",
+    "png": "illustrations/iot_controller.png",
+    "width": 144,
+    "height": 163,
+    "type": "raster-backed-svg"
+  },
+  {
+    "name": "camera",
+    "svg": "illustrations/camera.svg",
+    "png": "illustrations/camera.png",
+    "width": 141,
+    "height": 163,
+    "type": "raster-backed-svg"
+  },
+  {
+    "name": "irrigation_pipe",
+    "svg": "illustrations/irrigation_pipe.svg",
+    "png": "illustrations/irrigation_pipe.png",
+    "width": 310,
+    "height": 163,
+    "type": "raster-backed-svg"
+  },
+  {
+    "name": "water_tank",
+    "svg": "illustrations/water_tank.svg",
+    "png": "illustrations/water_tank.png",
+    "width": 137,
+    "height": 165,
+    "type": "raster-backed-svg"
+  },
+  {
+    "name": "plant",
+    "svg": "icons/agriculture_iot/plant.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "water",
+    "svg": "icons/agriculture_iot/water.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "temperature",
+    "svg": "icons/agriculture_iot/temperature.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "sunlight",
+    "svg": "icons/agriculture_iot/sunlight.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "humidity",
+    "svg": "icons/agriculture_iot/humidity.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "connectivity",
+    "svg": "icons/agriculture_iot/connectivity.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "security",
+    "svg": "icons/agriculture_iot/security.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "analytics",
+    "svg": "icons/agriculture_iot/analytics.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "alert",
+    "svg": "icons/agriculture_iot/alert.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "energy",
+    "svg": "icons/agriculture_iot/energy.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "irrigation",
+    "svg": "icons/agriculture_iot/irrigation.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "greenhouse",
+    "svg": "icons/agriculture_iot/greenhouse.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "solar",
+    "svg": "icons/agriculture_iot/solar.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "camera",
+    "svg": "icons/agriculture_iot/camera.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "monitoring",
+    "svg": "icons/agriculture_iot/monitoring.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "success",
+    "svg": "icons/symbols/success.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "error",
+    "svg": "icons/symbols/error.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "warning",
+    "svg": "icons/symbols/warning.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "info",
+    "svg": "icons/symbols/info.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "smile",
+    "svg": "icons/symbols/smile.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "confetti",
+    "svg": "icons/symbols/confetti.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "rocket",
+    "svg": "icons/symbols/rocket.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "seedling",
+    "svg": "icons/symbols/seedling.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "water",
+    "svg": "icons/symbols/water.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "sun",
+    "svg": "icons/symbols/sun.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "home",
+    "svg": "icons/navigation/home.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "devices",
+    "svg": "icons/navigation/devices.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "control",
+    "svg": "icons/navigation/control.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "history",
+    "svg": "icons/navigation/history.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "profile",
+    "svg": "icons/navigation/profile.svg",
+    "width": 64,
+    "height": 64,
+    "type": "native-vector-svg"
+  },
+  {
+    "name": "primary_button",
+    "svg": "components/primary_button.svg",
+    "type": "native-vector-svg-component"
+  },
+  {
+    "name": "secondary_button",
+    "svg": "components/secondary_button.svg",
+    "type": "native-vector-svg-component"
+  },
+  {
+    "name": "text_input",
+    "svg": "components/text_input.svg",
+    "type": "native-vector-svg-component"
+  },
+  {
+    "name": "password_input",
+    "svg": "components/password_input.svg",
+    "type": "native-vector-svg-component"
+  },
+  {
+    "name": "device_status_card",
+    "svg": "components/device_status_card.svg",
+    "type": "native-vector-svg-component"
+  },
+  {
+    "name": "page_indicator",
+    "svg": "components/page_indicator.svg",
+    "type": "native-vector-svg-component"
+  }
+]

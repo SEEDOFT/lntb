@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>Alert</title>
+  
+  <path d="M18 47H46L42 41V27C42 20 38 14 32 13C26 14 22 20 22 27V41L18 47Z" fill="#2563EB"/>
+  <path d="M27 50C28 55 36 55 37 50" fill="#1E3A8A"/>
+  <circle cx="32" cy="9" r="4" fill="#2563EB"/>
+
+</svg>

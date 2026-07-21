@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>Monitoring</title>
+  
+  <path d="M10 43A22 22 0 0 1 54 43" fill="none" stroke="#1E3A8A" stroke-width="5" stroke-linecap="round"/>
+  <path d="M17 43A15 15 0 0 1 47 43" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round"/>
+  <path d="M32 43L44 25" stroke="#2563EB" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="32" cy="43" r="5" fill="#334155"/>
+
+</svg>

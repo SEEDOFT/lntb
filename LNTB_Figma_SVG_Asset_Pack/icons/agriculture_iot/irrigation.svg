@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>Irrigation</title>
+  
+  <path d="M31 55V37" stroke="#16A34A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M31 42C24 36 18 36 12 39C16 49 22 53 31 54" fill="#16A34A"/>
+  <path d="M32 36C38 28 45 27 53 30C49 40 42 44 32 44" fill="#84CC16"/>
+  <path d="M20 22C20 14 25 9 32 9C39 9 44 14 44 22" fill="none" stroke="#2563EB" stroke-width="4"/>
+  <path d="M15 25L10 33M26 25L23 35M38 25L41 35M49 25L54 33" stroke="#0EA5E9" stroke-width="3" stroke-linecap="round"/>
+
+</svg>
