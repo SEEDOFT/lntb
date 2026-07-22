@@ -1,6 +1,6 @@
 [submodule "lntb-api"]
 	path = lntb-api
-	url = ./lntb-api
+	url = https://github.com/SEEDOFT/lntb-api.git
 [submodule "lntb_app"]
 	path = lntb_app
-	url = ./lntb_app
+	url = https://github.com/SEEDOFT/lntb_app.git
