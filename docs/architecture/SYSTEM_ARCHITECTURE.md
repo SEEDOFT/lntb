@@ -8,6 +8,9 @@ flowchart LR
     B --> C[(Relational Database)]
     B --> D[Laravel Sanctum]
     B --> E[Google Identity Validation]
+    B --> H[Laravel Database Queue]
+    H --> I[Firebase Cloud Messaging]
+    I --> A
 
     F[IoT Device] -. Future MQTT integration .-> G[MQTT Broker]
     B -. Future publish/consume .-> G
@@ -40,6 +43,9 @@ Responsibilities:
 - Device-control command creation
 - API Resources
 - Error responses
+- Idempotent in-app welcome notification creation
+- Multi-installation FCM token synchronization and per-device queued delivery
+- Native foreground alerts with unread badge updates in Flutter
 
 ## Database
 
@@ -124,7 +130,7 @@ sequenceDiagram
 - Device credentials
 - Telemetry ingestion
 - Realtime WebSocket updates
-- Push notifications
+- Additional transactional and device-alert push notifications
 - Farm and crop modules
 - AI assistant
 - Computer vision

@@ -24,6 +24,20 @@ The system validates the Google identity and either links it to an allowed exist
 
 The current Sanctum token is deleted.
 
+### Notifications
+
+#### FR-NOTIFY-001 — Welcome notification
+
+After a new account transaction commits, the system creates exactly one unread
+welcome notification for that user. When the user has an FCM registration
+token, push delivery is queued and retried independently from registration.
+Push failure must not roll back account creation or remove the in-app
+notification.
+
+Each signed-in mobile installation has its own stable device key and FCM token.
+Token rotation updates that installation, logout revokes only the current
+installation, and per-device delivery tracking prevents duplicate retry sends.
+
 ### Device registration
 
 #### FR-DEV-001 — Claim device
@@ -118,3 +132,10 @@ All API endpoints return a consistent JSON structure.
 ### NFR-007 — Testing
 
 Pest tests must cover successful registration, duplicate identity, Google authentication, login failure, device claim success/failure, owner-only access grants, five-user limit, access revocation, and authorized/unauthorized control.
+
+### NFR-008 — Notification delivery
+
+- FCM delivery runs through a persistent Laravel queue worker.
+- Firebase Admin credentials are read from environment configuration and are never committed.
+- Welcome notification creation is idempotent per user.
+- Invalid FCM registration tokens are cleared without logging their value.

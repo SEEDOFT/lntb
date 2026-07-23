@@ -11,6 +11,10 @@
 - Sanctum token creation
 - Current-user profile
 - Logout (revoke current token)
+- Persist one welcome notification when a user account is first created
+- Synchronize FCM tokens for multiple signed-in mobile installations
+- Queue idempotent per-installation welcome delivery with native foreground alerts
+- List and update the authenticated user's in-app notifications
 
 ### Device ownership
 
@@ -50,7 +54,7 @@
 - Tomato ripeness AI
 - Farmer AI assistant
 - Farm and crop-cycle management
-- Notifications
+- Notifications other than the welcome notification and existing in-app notification API
 - Realtime WebSocket updates
 - MQTT broker integration
 - Offline synchronization

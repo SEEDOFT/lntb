@@ -20,6 +20,18 @@ User enters the application
 
 The user is not created in a pending state.
 
+After the account transaction commits, Laravel creates one unread welcome
+notification. Each active mobile installation gets an idempotent push-delivery
+record and dedicated queue job. If the registration token becomes available
+after authentication, the authenticated token-sync endpoint queues the still
+unsent welcome notification. Registration remains successful when FCM is
+unavailable.
+
+Flutter keeps a stable installation key in secure storage and synchronizes its
+FCM token during authentication, authenticated startup, and token rotation.
+Logout revokes only the current installation, so other signed-in phones remain
+eligible for notifications.
+
 ## Google authentication
 
 ```text

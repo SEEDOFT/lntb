@@ -43,6 +43,26 @@ Initial codes: `active`, `suspended`, `closed`.
 
 At least one authentication path must exist: phone number plus password, email plus password, or Google ID.
 
+## `user_fcm_tokens`
+
+| Column | Type | Rules |
+|---|---|---|
+| id | BIGINT | Primary key |
+| user_id | BIGINT UNSIGNED | Indexed |
+| device_key | VARCHAR(128) | Unique |
+| fcm_token | VARCHAR(255) | Nullable, unique |
+| platform | VARCHAR(50) | Nullable |
+| device_name | VARCHAR(120) | Nullable |
+| app_version | VARCHAR(30) | Nullable |
+| last_used_at | TIMESTAMP | Nullable |
+| revoked_at | TIMESTAMP | Nullable |
+| created_at | TIMESTAMP | Required |
+| updated_at | TIMESTAMP | Required |
+
+One user may have multiple active installations. Token rotation updates the row
+identified by `device_key`; revocation clears the token without affecting other
+installations.
+
 ## `device_types`
 
 | Column | Type | Rules |
@@ -142,6 +162,44 @@ Rules:
 | updated_at | TIMESTAMP | Required |
 
 Initial codes: `pending`, `completed`, `failed`.
+
+## `notifications`
+
+| Column | Type | Rules |
+|---|---|---|
+| id | BIGINT | Primary key |
+| user_id | BIGINT UNSIGNED | Indexed |
+| deduplication_key | VARCHAR(255) | Nullable, unique |
+| notification_type_id | BIGINT UNSIGNED | Indexed |
+| notification_status_id | BIGINT UNSIGNED | Indexed |
+| title | VARCHAR(255) | Required |
+| body | TEXT | Required |
+| data | JSON | Nullable |
+| push_sent_at | TIMESTAMP | Nullable |
+| push_failed_at | TIMESTAMP | Nullable |
+| push_failure_message | VARCHAR(500) | Nullable |
+| created_at | TIMESTAMP | Required |
+| updated_at | TIMESTAMP | Required |
+
+Welcome notifications use `welcome:user:{user_id}` as their deduplication key.
+Read state and push delivery state are intentionally tracked separately.
+
+## `notification_push_deliveries`
+
+| Column | Type | Rules |
+|---|---|---|
+| id | BIGINT | Primary key |
+| notification_id | BIGINT UNSIGNED | Indexed |
+| user_fcm_token_id | BIGINT UNSIGNED | Indexed |
+| queued_at | TIMESTAMP | Nullable |
+| sent_at | TIMESTAMP | Nullable |
+| failed_at | TIMESTAMP | Nullable |
+| failure_message | VARCHAR(500) | Nullable |
+| created_at | TIMESTAMP | Required |
+| updated_at | TIMESTAMP | Required |
+
+The notification and FCM-token pair is unique. Per-installation tracking avoids
+resending successful deliveries when another phone is retried.
 
 ## `device_controls`
 

@@ -53,6 +53,8 @@ Request:
   "email": null,
   "password": "StrongPassword123!",
   "password_confirmation": "StrongPassword123!",
+  "fcm_token": "firebase-registration-token",
+  "fcm_device_key": "stable-random-installation-key",
   "device_name": "Dara Android",
   "platform": "android",
   "app_version": "1.0.0"
@@ -71,6 +73,8 @@ Request:
 {
   "login": "+85512345678",
   "password": "StrongPassword123!",
+  "fcm_token": "firebase-registration-token",
+  "fcm_device_key": "stable-random-installation-key",
   "device_name": "Dara Android",
   "platform": "android",
   "app_version": "1.0.0"
@@ -87,7 +91,9 @@ Request:
 
 ```json
 {
-  "access_token": "google-oauth-access-token",
+  "token": "google-id-token",
+  "fcm_token": "firebase-registration-token",
+  "fcm_device_key": "stable-random-installation-key",
   "device_name": "Dara Android",
   "platform": "android",
   "app_version": "1.0.0"
@@ -104,6 +110,47 @@ GET /api/v1/auth/me
 
 ```http
 POST /api/v1/auth/logout
+```
+
+Optional request:
+
+```json
+{
+  "fcm_device_key": "stable-random-installation-key"
+}
+```
+
+The supplied installation is revoked without affecting other signed-in phones.
+
+### Synchronize an FCM installation
+
+```http
+POST /api/v1/auth/fcm-token
+```
+
+```json
+{
+  "fcm_token": "firebase-registration-token",
+  "fcm_device_key": "stable-random-installation-key",
+  "device_name": "Dara Android",
+  "platform": "android",
+  "app_version": "1.0.0+1"
+}
+```
+
+The same request is used after authentication, app startup, and FCM token
+rotation. Repeating it updates the same installation.
+
+### Revoke an FCM installation
+
+```http
+DELETE /api/v1/auth/fcm-token
+```
+
+```json
+{
+  "fcm_device_key": "stable-random-installation-key"
+}
 ```
 
 ## Device endpoints
@@ -143,6 +190,35 @@ Business error codes:
 ```http
 GET /api/v1/devices/{device}
 ```
+
+## Notification endpoints
+
+### List notifications
+
+```http
+GET /api/v1/notifications
+```
+
+Returns unread/read notifications for the authenticated user and excludes
+notifications marked as deleted. Pagination metadata includes `unread_count`,
+which is the authoritative unread total across all pages.
+
+### Update notification status
+
+```http
+PATCH /api/v1/notifications/{notification}
+```
+
+Request:
+
+```json
+{
+  "status": "read"
+}
+```
+
+Allowed status codes: `unread`, `read`, `deleted`.
+The response metadata includes the updated `unread_count`.
 
 ## Shared-access endpoints
 
@@ -222,6 +298,23 @@ php artisan device:provision {serial} {mac} --type=smart_farm_controller --name=
 ```
 
 The generated claim code is displayed once and only its hash is stored. Sanctum tokens expire after 30 days.
+
+Process notification delivery with a persistent worker:
+
+```text
+php artisan queue:work database --queue=notifications,default --tries=3
+```
+
+Required backend environment configuration:
+
+```text
+FIREBASE_PROJECT=app
+FIREBASE_CREDENTIALS=storage/app/firebase/service-account.json
+FIREBASE_HTTP_CLIENT_TIMEOUT=10
+```
+
+The service-account JSON must be downloaded from the Firebase project used by
+the mobile application and must not be committed.
 
 ## Required Form Requests
 
