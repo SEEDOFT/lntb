@@ -1,9 +1,9 @@
 # Authentication and Device Flow
 
-## Registration with phone number or email
+## Registration with phone number
 
 ```text
-User submits registration data
+User submits registration data (name, country_code, phone_number, password)
         ↓
 Form Request validates data
         ↓

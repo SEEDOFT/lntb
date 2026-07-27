@@ -6,13 +6,11 @@
 
 #### FR-AUTH-001 — Register with phone number and password
 
-The user provides name, phone number, password, and password confirmation. The system validates uniqueness and creates an active user.
+The user provides name, country code, phone number, password, and password confirmation. The system validates uniqueness and creates an active user.
 
-#### FR-AUTH-002 — Register with email and password
+#### FR-AUTH-002 — Sign in with phone number and password
 
-The user provides name, email, password, and password confirmation. The system validates uniqueness and creates an active user.
-
-#### FR-AUTH-003 — Sign in with phone number or email and password
+#### FR-AUTH-003 — Sign in with phone number and password
 
 The system authenticates valid credentials and creates a Sanctum token.
 

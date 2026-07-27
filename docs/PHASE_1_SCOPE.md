@@ -5,8 +5,7 @@
 ### Authentication
 
 - Register with phone number and password
-- Register with email and password
-- Sign in with phone/email and password
+- Sign in with phone number and password
 - Google sign-in
 - Sanctum token creation
 - Current-user profile

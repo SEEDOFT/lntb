@@ -38,7 +38,7 @@ Validation errors include an `errors` object keyed by request field.
 
 ## Authentication endpoints
 
-### Register with password
+### Register with phone and password
 
 ```http
 POST /api/v1/auth/register
@@ -49,8 +49,8 @@ Request:
 ```json
 {
   "name": "Dara",
-  "phone_number": "+85512345678",
-  "email": null,
+  "country_code": "+855",
+  "phone_number": "12345678",
   "password": "StrongPassword123!",
   "password_confirmation": "StrongPassword123!",
   "fcm_token": "firebase-registration-token",
@@ -71,7 +71,8 @@ Request:
 
 ```json
 {
-  "login": "+85512345678",
+  "country_code": "+855",
+  "phone_number": "12345678",
   "password": "StrongPassword123!",
   "fcm_token": "firebase-registration-token",
   "fcm_device_key": "stable-random-installation-key",
@@ -80,6 +81,8 @@ Request:
   "app_version": "1.0.0"
 }
 ```
+
+A compound `login` field (e.g. `+85512345678`) may be used instead of `country_code` + `phone_number`.
 
 ### Google authentication
 
