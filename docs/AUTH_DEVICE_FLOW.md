@@ -157,6 +157,30 @@ Update control status as processing continues
 
 The Phase 1 API may initially create and track commands before MQTT integration is added.
 
+## Batch device control
+
+Input:
+
+- 1–20 unique `device_ids`
+- one supported `control_type`
+- optional `control_data`
+
+```text
+Validate the complete request
+        ↓
+Load requested device records without exposing missing devices
+        ↓
+For each ID, authorize control with DevicePolicy
+        ↓
+Create a normal pending control record for each authorized device
+        ↓
+Return accepted or failed result for every requested ID
+```
+
+Batch processing uses partial success. Missing and inaccessible IDs both return
+`DEVICE_ACCESS_DENIED`. A failure for one device does not roll back successful
+commands for other authorized devices.
+
 ## User session model
 
 Sanctum tokens represent logged-in mobile sessions directly. There is no separate `user_sessions` table. The token is created during authentication and deleted on logout.

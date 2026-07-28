@@ -98,6 +98,7 @@ Initial codes: `available`, `active`, `suspended`, `maintenance`, `retired`.
 | device_status_id | BIGINT UNSIGNED | Indexed |
 | owner_user_id | BIGINT UNSIGNED | Nullable, indexed |
 | name | VARCHAR(120) | Nullable |
+| placement | VARCHAR(100) | Nullable |
 | serial_number | VARCHAR(100) | Unique |
 | mac_address | VARCHAR(17) | Unique |
 | claim_code_hash | VARCHAR(255) | Required |
@@ -114,6 +115,8 @@ Rules:
 - Store claim-code hash only.
 - `owner_user_id` is null before claim.
 - `claim_code_used_at` prevents code reuse.
+- Placement is an owner-managed display value used to group devices in the
+  mobile zone board; it is not a coordinate or reference column.
 
 ## `device_access_statuses`
 

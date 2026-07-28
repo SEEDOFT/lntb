@@ -194,6 +194,25 @@ Business error codes:
 GET /api/v1/devices/{device}
 ```
 
+### Update device name or placement
+
+```http
+PATCH /api/v1/devices/{device}
+```
+
+Owner-only request:
+
+```json
+{
+  "name": "Greenhouse Controller 1",
+  "placement": "Greenhouse A"
+}
+```
+
+`name` and `placement` are trimmed. Placement may be null or blank to return
+the device to the mobile Unassigned group. Active shared users may see these
+values but cannot update them.
+
 ## Notification endpoints
 
 ### List notifications
@@ -286,6 +305,42 @@ Request:
 
 Supported Phase 1 control types: `irrigation.start`, `irrigation.stop`, `fan.start`, `fan.stop`, `roof.open`, `roof.close`, `camera.capture`. `control_data` must be null or a JSON object no larger than 8 KB.
 
+### Create control commands for selected devices
+
+```http
+POST /api/v1/devices/controls/batch
+```
+
+Request:
+
+```json
+{
+  "device_ids": [12, 14, 18],
+  "control_type": "irrigation.start",
+  "control_data": {}
+}
+```
+
+`device_ids` must contain 1–20 unique positive IDs. The endpoint authorizes
+each device independently and creates the same ordinary pending control record
+used by the single-device endpoint. Results are partial: authorized devices may
+succeed when another ID is missing or inaccessible. Missing and inaccessible
+devices both return `DEVICE_ACCESS_DENIED` without exposing device details.
+
+```json
+{
+  "data": {
+    "accepted_count": 2,
+    "failed_count": 1,
+    "results": [
+      {"device_id": 12, "accepted": true, "control": {}},
+      {"device_id": 14, "accepted": true, "control": {}},
+      {"device_id": 18, "accepted": false, "error_code": "DEVICE_ACCESS_DENIED"}
+    ]
+  }
+}
+```
+
 ### View control command
 
 ```http
@@ -293,6 +348,30 @@ GET /api/v1/devices/{device}/controls/{control}
 ```
 
 ## Operational commands
+
+Create the deterministic local Phase 1 demo:
+
+```text
+php artisan phase1:demo
+php artisan phase1:demo --reset
+```
+
+The command is refused in production. It creates an unclaimed
+`LNTB-DEMO-0001` device (`02:00:00:00:00:01`, firmware `1.0.0-demo`) with
+claim code `LNTB-DEMO-2026`, plus `owner@demo.lntb.test` and
+`shared1@demo.lntb.test` through `shared6@demo.lntb.test`. Every demo account
+uses password `LntbDemo123!`. The scanner-compatible SVG is written to
+`storage/app/demo/lntb-demo-device-qr.svg`.
+
+The QR payload is:
+
+```json
+{"mac_address":"02:00:00:00:00:01","claim_code":"LNTB-DEMO-2026","name":"LNTB Demo Controller"}
+```
+
+Running without `--reset` is idempotent and preserves an existing claim.
+`--reset` removes only this fixed device's access/control records and restores
+it to an unclaimed state.
 
 Provision inventory before claim:
 
@@ -327,6 +406,7 @@ the mobile application and must not be committed.
 - `ClaimDeviceRequest`
 - `GrantDeviceUserRequest`
 - `CreateDeviceControlRequest`
+- `CreateBatchDeviceControlRequest`
 
 ## Required API Resources
 

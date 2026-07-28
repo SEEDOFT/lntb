@@ -45,8 +45,7 @@ A registered user granted access by the owner.
 The shared user can:
 
 - View assigned devices.
-- Accept or reject invitations.
-- Control devices after access becomes active.
+- Control devices immediately after the owner grants active access.
 - View control history for devices they can access.
 
 The shared user cannot:
@@ -56,6 +55,9 @@ The shared user cannot:
 - Invite other users.
 - Revoke another user.
 - Change ownership information.
+
+The owner may grant access to at most five active shared users. There is no
+invitation acceptance flow in Phase 1.
 
 ## Authentication methods
 

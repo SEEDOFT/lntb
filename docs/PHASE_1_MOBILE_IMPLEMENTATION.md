@@ -14,7 +14,9 @@ remain out of scope.
   LNTB logo and localized text rendered by Flutter.
 - Session validation runs while the splash remains visible for its minimum
   display duration.
-- First-time installations see one welcome screen rather than a carousel.
+- First-time installations see three onboarding pages before login.
+- Skip is available before the final onboarding page and hidden on the final
+  page.
 - Main navigation contains Home, Devices, Shared Access, History, and Profile.
 - Blue is used for primary actions and green for successful or online states.
 - Khmer is the default language and every Phase 1 screen retains English
@@ -52,6 +54,7 @@ All routes are under `/api/v1` and authenticated routes use Sanctum.
 | POST | `/devices/claim` | Claim using normalized MAC and claim code |
 | GET | `/devices/{id}` | Load authorized device details |
 | GET/POST | `/devices/{id}/controls` | Read or create device commands |
+| POST | `/devices/controls/batch` | Control 1–20 selected authorized devices |
 | GET | `/controls` | Paginated history across all authorized devices |
 | GET/POST | `/devices/{id}/users` | List or grant shared access as owner |
 | DELETE | `/devices/{id}/users/{access}` | Revoke a shared-access record |
@@ -65,7 +68,7 @@ fields. Device commands remain limited to `irrigation.start`,
 ## Architecture
 
 Flutter screens consume typed `AppUser`, `DeviceModel`, `DeviceAccess`, and
-`ControlRecord` objects. Account operations are isolated in
+`ControlRecord` objects, plus typed batch-control results. Account operations are isolated in
 `AccountRepository`, while device claiming, access, controls, and history are
 isolated in `DeviceRepository`. Controllers own loading, empty, error, and
 command states; widgets render those states and do not create mock data. A
@@ -77,6 +80,13 @@ Laravel keeps validation in Form Requests, authentication behavior in
 API Resources, and notification transport in queued notification classes.
 The global history query includes only devices owned by the user or devices
 with active shared access.
+
+The Device Placement screen is a zone board. It groups case-equivalent,
+trimmed placement names together and puts blank placements in Unassigned.
+Online owned and active shared devices may be selected. A reviewed batch
+command returns accepted or failed status per device; successful selections
+clear and failed selections remain for retry. Owners may edit device name and
+placement, while shared users have read-only placement access.
 
 ## Claim QR Payload
 
@@ -92,13 +102,13 @@ Supported QR labels contain JSON:
 
 `name` is optional. Invalid QR data leaves manual MAC/code entry available.
 
-## Full Proposal Expansion
+## Later-module code
 
-The mobile application now defines API-backed screen contracts for configured
+The repository contains API-backed screen contracts for configured
 farms, crop-cycle summaries, daily tasks, sensor readings, irrigation status,
 water/electricity usage, ripeness results, digital logs, harvest records, and a
-read-only farm assistant. The main navigation is Home, Farm, Devices, History,
-and Profile.
+read-only farm assistant. These later modules are not part of Phase 1 and are
+not included in Phase 1 navigation.
 
 Laravel persists these domains using lookup-driven tables without foreign-key
 constraints or database enums. Farms remain backend-configured; the mobile app

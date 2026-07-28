@@ -41,6 +41,8 @@
 - Store control type and control data
 - Update command status
 - View control history
+- Select and control multiple authorized devices with per-device results
+- Group accessible devices by their owner-defined placement
 
 ## Excluded
 
@@ -82,3 +84,20 @@
 9. Unauthorized users cannot view or control the device.
 10. Control history is stored.
 11. Pest tests pass.
+12. A user can select authorized devices by placement and submit one reviewed
+    command with per-device results.
+
+## Owner and shared-user capabilities
+
+| Capability | Owner | Active shared user | Revoked user |
+| --- | --- | --- | --- |
+| See device and details | Yes | Yes | No |
+| Send controls | Yes | Yes | No |
+| View control history | Yes | Yes | No |
+| List shared users | Yes | No | No |
+| Grant or revoke access | Yes | No | No |
+
+Only active registered accounts can be granted access. A device supports five
+active shared users in addition to its owner. Revoked records remain available
+for audit, are excluded from management/device lists, and can be activated
+again by a later owner grant.

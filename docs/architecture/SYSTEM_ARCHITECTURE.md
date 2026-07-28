@@ -27,6 +27,7 @@ Responsibilities:
 - Device list and details
 - Device user management
 - Device-control UI
+- Zone-based multi-device selection and batch-control result UI
 - Control-history UI
 
 ## Laravel API
@@ -41,6 +42,7 @@ Responsibilities:
 - Five-user sharing rule
 - Authorization
 - Device-control command creation
+- Partial-success batch command creation with per-device policy authorization
 - API Resources
 - Error responses
 - Idempotent in-app welcome notification creation

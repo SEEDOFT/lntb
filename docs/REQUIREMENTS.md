@@ -97,6 +97,21 @@ A command has a lookup-table state: `pending`, `completed`, or `failed`.
 
 Authorized users may view device-control history.
 
+#### FR-CTRL-005 — Control selected devices
+
+The owner or an active shared user may submit one supported command for 1–20
+unique authorized devices. Authorization is evaluated independently for every
+device. The response reports accepted and failed results per device, and an
+inaccessible device does not prevent authorized devices from receiving their
+commands.
+
+#### FR-CTRL-006 — Group devices by placement
+
+The mobile application groups accessible devices by trimmed,
+case-insensitive placement values while preserving a display label. Devices
+without placement appear in Unassigned. Only the owner may update device name
+or placement.
+
 ## Non-functional requirements
 
 ### NFR-001 — No foreign-key constraints
