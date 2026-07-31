@@ -86,16 +86,29 @@ API Resources, and notification transport in queued notification classes.
 The global history query includes only devices owned by the user or devices
 with active shared access.
 
-The Device Placement screen is a zone board. It groups case-equivalent,
-trimmed placement names together and puts blank placements in Unassigned.
-Online owned and active shared devices may be selected. A reviewed batch
-command returns accepted or failed status per device; successful selections
-clear and failed selections remain for retry. Owners may edit device name and
-placement, while shared users have read-only placement access.
+The Device screen groups accessible devices by normalized placement with a
+summary strip (owned / shared / online counts). Case-equivalent, trimmed
+placement names are grouped together; blank placements appear in an Unassigned
+group. Owners may edit device name and placement from the control screen, while
+shared users have read-only placement access.
+
+The History screen is a daily bank-transaction-style timeline. Records are
+grouped by day (Today, Yesterday, or the calendar date) with per-day action
+counts. Each row shows the action icon, translated action label, Khmer device
+name, the requested time, the active runtime for paired start→stop commands,
+and the estimated energy used. Runtime is derived by pairing start/stop
+commands per device; energy is computed from declared watts-per-hour constants
+in `device_power_constants.dart` (fan, roof, camera, water pump, controller).
+The values are set in code so they can be changed later without an in-app input.
+Tapping a row opens a detail sheet with the full record including runtime,
+energy, and failure reason.
 
 The Home dashboard metric cards open a bottom sheet with the translated state
 description and, for non-normal readings, a warning line. The farm assistant's
-latest report is displayed as seeded; the test dataset seeds it in Khmer.
+latest report is displayed as seeded; the test dataset seeds it in Khmer. The
+dashboard also shows a device overview card (online/total with per-device
+chips), a usage summary (water and electricity), and an estimated operating
+cost card.
 
 On the device detail (control) screen, the Details tile shows the device's
 rated power in watts. Owners may tap the power row to enter or clear the

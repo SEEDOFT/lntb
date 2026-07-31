@@ -67,10 +67,22 @@ validation on physical Android and iOS devices remains pending.
   watts-per-hour dialog, shared users read-only
 - Rating is the basis for runtime energy estimation (kWh = watts × hours / 1000)
 
+### History and dashboard redesign
+
+- Daily bank-transaction-style history timeline grouped by day
+- Start→stop pairing computes active runtime per action
+- Estimated energy use from declared watts-per-hour constants
+  (`device_power_constants.dart`), editable in code without an in-app input
+- Seeded demo device names displayed in Khmer across history, devices, and
+  control screens
+- Device screen redesigned with a summary strip and placement grouping
+- Dashboard adds a device overview card and an estimated operating cost card
+
 ## Verification completed
 
 - Full backend Pest suite: 61 passed, 195 assertions
-- Full Flutter test suite: 29 passed (including new `rated_power_watts` parsing)
+- Full Flutter test suite: 33 passed (including timeline runtime/energy
+  formatting and Khmer device-name mapping tests)
 - `dart analyze lib` clean
 - PHP formatting, PHP syntax checks, and repository diff checks completed
   successfully
