@@ -1,6 +1,6 @@
 # LNTB Phase 1 Progress
 
-Last updated: 2026-07-29
+Last updated: 2026-07-31
 
 ## Overall status
 
@@ -56,14 +56,24 @@ validation on physical Android and iOS devices remains pending.
 - Per-device accepted/failed results and ordinary pending control records
 - Successful selections clear while failures remain available for retry
 
+### Device power rating
+
+- `rated_power_watts` column on devices (owner-set power draw per hour)
+- Owner-only `PATCH /devices/{id}` support and validation for the rating
+- `rated_power_watts` returned in the device resource
+- `device:provision --power=` option for provisioning-time rating
+- Test dataset seeds per-device ratings (fan, roof, camera, water meter/pump)
+- Mobile device-detail tile shows the rating; owners edit it inline with a
+  watts-per-hour dialog, shared users read-only
+- Rating is the basis for runtime energy estimation (kWh = watts × hours / 1000)
+
 ## Verification completed
 
-- Focused Phase 1 demo-command Pest tests: 2 passed, 14 assertions
-- Focused ownership/access/control Pest tests: 15 passed, 27 assertions
-- Focused batch-control and placement-authorization Pest tests: 8 passed,
-  25 assertions
-- PHP formatting, PHP syntax checks, Dart formatting, and repository diff checks
-  completed successfully
+- Full backend Pest suite: 61 passed, 195 assertions
+- Full Flutter test suite: 29 passed (including new `rated_power_watts` parsing)
+- `dart analyze lib` clean
+- PHP formatting, PHP syntax checks, and repository diff checks completed
+  successfully
 
 ## Remaining release checks
 

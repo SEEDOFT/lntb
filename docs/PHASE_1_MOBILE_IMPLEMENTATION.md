@@ -53,6 +53,7 @@ All routes are under `/api/v1` and authenticated routes use Sanctum.
 | GET | `/devices` | List owned and actively shared devices |
 | POST | `/devices/claim` | Activate using an owner-bound one-time QR token |
 | GET | `/devices/{id}` | Load authorized device details |
+| PATCH | `/devices/{id}` | Update name, placement, or `rated_power_watts` (owner only) |
 | GET/POST | `/devices/{id}/controls` | Read or create device commands |
 | POST | `/devices/controls/batch` | Control 1–20 selected authorized devices |
 | GET | `/controls` | Paginated history across all authorized devices |
@@ -95,6 +96,12 @@ placement, while shared users have read-only placement access.
 The Home dashboard metric cards open a bottom sheet with the translated state
 description and, for non-normal readings, a warning line. The farm assistant's
 latest report is displayed as seeded; the test dataset seeds it in Khmer.
+
+On the device detail (control) screen, the Details tile shows the device's
+rated power in watts. Owners may tap the power row to enter or clear the
+watts-per-hour rating via the device update API (`PATCH /devices/{id}`).
+Shared users see the value read-only. The rating is used for runtime energy
+estimation and is set per device, including water-pump / water-meter devices.
 
 ## Claim QR Payload
 

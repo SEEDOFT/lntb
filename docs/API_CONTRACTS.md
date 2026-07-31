@@ -190,7 +190,7 @@ Business error codes:
 GET /api/v1/devices/{device}
 ```
 
-### Update device name or placement
+### Update device name, placement, or rated power
 
 ```http
 PATCH /api/v1/devices/{device}
@@ -201,13 +201,20 @@ Owner-only request:
 ```json
 {
   "name": "Greenhouse Controller 1",
-  "placement": "Greenhouse A"
+  "placement": "Greenhouse A",
+  "rated_power_watts": 85
 }
 ```
 
 `name` and `placement` are trimmed. Placement may be null or blank to return
 the device to the mobile Unassigned group. Active shared users may see these
 values but cannot update them.
+
+`rated_power_watts` is optional, must be an integer between 1 and 100000, and
+may be null to clear the value. It is the device's power draw per hour in watts,
+used for runtime energy estimation (`rated_power_watts × runtime_hours / 1000`
+= kWh). A water-pump or water-meter device's rating is entered the same way.
+The value is returned in `DeviceResource.rated_power_watts`.
 
 ## Notification endpoints
 

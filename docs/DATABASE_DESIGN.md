@@ -103,6 +103,7 @@ Initial codes: `available`, `active`, `suspended`, `maintenance`, `retired`.
 | mac_address | VARCHAR(17) | Unique |
 | claim_code_hash | VARCHAR(255) | Legacy, no longer accepted by the activation API |
 | firmware_version | VARCHAR(50) | Nullable |
+| rated_power_watts | INT UNSIGNED | Nullable |
 | claim_code_used_at | TIMESTAMP | Nullable |
 | claimed_at | TIMESTAMP | Nullable |
 | last_seen_at | TIMESTAMP | Nullable |
@@ -118,6 +119,10 @@ Rules:
   authoritative for new activations.
 - Placement is an owner-managed display value used to group devices in the
   mobile zone board; it is not a coordinate or reference column.
+- `rated_power_watts` is the device's power draw per hour in watts. It is set by
+  the owner at provision time or via the device update API, and is the basis for
+  runtime energy estimation. It is nullable when unknown and applies equally to
+  water-pump / water-meter devices.
 
 ## `device_access_statuses`
 
