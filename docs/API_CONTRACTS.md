@@ -354,7 +354,7 @@ php artisan app:seed-test-data --reset
 ```
 
 The dataset is owned by the phone `+855 010000099` (password `LntbTest123!`) and
-contains Sokha Tomato Farm, three active devices, current sensor readings,
+contains Sokha Tomato Farm, four active devices, current sensor readings,
 usage, notifications, and completed, pending, and failed control records. The
 command is idempotent, refuses non-local environments, and reset affects only
 this dedicated dataset. Local `DatabaseSeeder` runs include it when
@@ -365,30 +365,6 @@ does not alter unrelated table-count assertions.
 and `warnings`. Metrics include their source device and recorded time. Mobile
 clients must not substitute embedded operational values when this request
 fails.
-
-Create the deterministic local Phase 1 demo:
-
-```text
-php artisan phase1:demo
-php artisan phase1:demo --reset
-```
-
-The command is refused in production. It creates an unclaimed
-`LNTB-DEMO-0001` device (`02:00:00:00:00:01`, firmware `1.0.0-demo`) plus
-an activation bound to `owner@demo.lntb.test` and
-`shared1@demo.lntb.test` through `shared6@demo.lntb.test`. Every demo account
-uses password `LntbDemo123!`. The scanner-compatible SVG is written to
-`storage/app/demo/lntb-demo-device-qr.svg`.
-
-The QR payload is:
-
-```json
-{"v":1,"device_ref":"uuid","activation_token":"base64url-token","device_name":"LNTB Demo Controller"}
-```
-
-Running without `--reset` is idempotent and preserves an existing claim.
-`--reset` removes only this fixed device's access/control records and restores
-it to an unclaimed state.
 
 Provision inventory before claim:
 

@@ -32,8 +32,8 @@ validation on physical Android and iOS devices remains pending.
 - Seller-prepared, owner-bound, one-time QR device activation
 - Full-screen QR scanner with camera, scan target, flashlight, and gallery import
 - Immediate return of valid LNTB QR data to the claim form
-- Idempotent local/testing `phase1:demo` command and deterministic SVG QR
-- Fixed owner candidate, six shared-user candidates, and reset-safe demo device
+- Idempotent local/testing `app:seed-test-data` command with a complete mobile dataset
+- Fixed owner candidate and reset-safe test dataset
 
 ### Ownership and shared access
 
