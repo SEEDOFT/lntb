@@ -13,9 +13,8 @@ Phase 1 establishes the identity, device ownership, device sharing, and device-c
 A customer who purchases an LNTB IoT product must be able to:
 
 1. Register or sign in.
-2. Register the purchased IoT device using:
-   - the device MAC address;
-   - the generated claim code supplied with the product.
+2. Activate the purchased IoT device using a seller-prepared, one-time QR
+   bound to the customer's registered account.
 3. Become the main owner of that device.
 4. Invite up to five other registered users.
 5. Allow those users to control the device.

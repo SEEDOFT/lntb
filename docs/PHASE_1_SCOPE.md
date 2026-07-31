@@ -20,9 +20,9 @@
 - Device-type lookup
 - Device-status lookup
 - Device inventory record
-- MAC-address normalization
-- Generated claim-code verification
-- Claim device
+- Seller-prepared, account-bound activation QR
+- One-time activation-token verification
+- Activate device
 - Assign owner
 - List owned devices
 - View device details

@@ -164,7 +164,7 @@ DELETE /api/v1/auth/fcm-token
 GET /api/v1/devices
 ```
 
-### Claim device
+### Activate seller-prepared device
 
 ```http
 POST /api/v1/devices/claim
@@ -174,19 +174,15 @@ Request:
 
 ```json
 {
-  "mac_address": "AA:BB:CC:DD:EE:FF",
-  "claim_code": "ABCD-EFGH-1234",
+  "device_ref": "123e4567-e89b-12d3-a456-426614174000",
+  "activation_token": "base64url-encoded-256-bit-token",
   "name": "Smart Farm Controller"
 }
 ```
 
 Business error codes:
 
-- `DEVICE_NOT_FOUND`
-- `DEVICE_NOT_AVAILABLE`
-- `DEVICE_ALREADY_CLAIMED`
-- `INVALID_CLAIM_CODE`
-- `CLAIM_CODE_ALREADY_USED`
+- `INVALID_DEVICE_ACTIVATION`
 
 ### View device
 
@@ -349,6 +345,27 @@ GET /api/v1/devices/{device}/controls/{control}
 
 ## Operational commands
 
+Create or refresh the complete authenticated mobile test dataset in a local or
+testing environment:
+
+```text
+php artisan app:seed-test-data
+php artisan app:seed-test-data --reset
+```
+
+The dataset is owned by the phone `+855 010000099` (password `LntbTest123!`) and
+contains Sokha Tomato Farm, three active devices, current sensor readings,
+usage, notifications, and completed, pending, and failed control records. The
+command is idempotent, refuses non-local environments, and reset affects only
+this dedicated dataset. Local `DatabaseSeeder` runs include it when
+`LNTB_SEED_TEST_DATA=true`; automated tests opt in explicitly so lookup seeding
+does not alter unrelated table-count assertions.
+
+`GET /api/v1/farms/{farm}/dashboard` additively returns `devices`, `activity`,
+and `warnings`. Metrics include their source device and recorded time. Mobile
+clients must not substitute embedded operational values when this request
+fails.
+
 Create the deterministic local Phase 1 demo:
 
 ```text
@@ -357,8 +374,8 @@ php artisan phase1:demo --reset
 ```
 
 The command is refused in production. It creates an unclaimed
-`LNTB-DEMO-0001` device (`02:00:00:00:00:01`, firmware `1.0.0-demo`) with
-claim code `LNTB-DEMO-2026`, plus `owner@demo.lntb.test` and
+`LNTB-DEMO-0001` device (`02:00:00:00:00:01`, firmware `1.0.0-demo`) plus
+an activation bound to `owner@demo.lntb.test` and
 `shared1@demo.lntb.test` through `shared6@demo.lntb.test`. Every demo account
 uses password `LntbDemo123!`. The scanner-compatible SVG is written to
 `storage/app/demo/lntb-demo-device-qr.svg`.
@@ -366,7 +383,7 @@ uses password `LntbDemo123!`. The scanner-compatible SVG is written to
 The QR payload is:
 
 ```json
-{"mac_address":"02:00:00:00:00:01","claim_code":"LNTB-DEMO-2026","name":"LNTB Demo Controller"}
+{"v":1,"device_ref":"uuid","activation_token":"base64url-token","device_name":"LNTB Demo Controller"}
 ```
 
 Running without `--reset` is idempotent and preserves an existing claim.
@@ -379,7 +396,15 @@ Provision inventory before claim:
 php artisan device:provision {serial} {mac} --type=smart_farm_controller --name="..." --firmware="..."
 ```
 
-The generated claim code is displayed once and only its hash is stored. Sanctum tokens expire after 30 days.
+Prepare an owner-bound activation after the customer registers:
+
+```text
+php artisan device:prepare-activation {serial} {customer_login} --operator=seller-id
+```
+
+The command writes a one-time QR under `storage/app/activations`. The raw token
+exists only inside that QR; the database stores its hash. Sanctum tokens expire
+after 30 days.
 
 Process notification delivery with a persistent worker:
 

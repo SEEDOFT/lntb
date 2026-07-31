@@ -29,7 +29,7 @@ validation on physical Android and iOS devices remains pending.
 
 ### Device claim and demo environment
 
-- QR and manual device claiming with normalized MAC address and hashed claim code
+- Seller-prepared, owner-bound, one-time QR device activation
 - Full-screen QR scanner with camera, scan target, flashlight, and gallery import
 - Immediate return of valid LNTB QR data to the claim form
 - Idempotent local/testing `phase1:demo` command and deterministic SVG QR

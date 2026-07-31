@@ -101,7 +101,7 @@ Initial codes: `available`, `active`, `suspended`, `maintenance`, `retired`.
 | placement | VARCHAR(100) | Nullable |
 | serial_number | VARCHAR(100) | Unique |
 | mac_address | VARCHAR(17) | Unique |
-| claim_code_hash | VARCHAR(255) | Required |
+| claim_code_hash | VARCHAR(255) | Legacy, no longer accepted by the activation API |
 | firmware_version | VARCHAR(50) | Nullable |
 | claim_code_used_at | TIMESTAMP | Nullable |
 | claimed_at | TIMESTAMP | Nullable |
@@ -114,7 +114,8 @@ Rules:
 - Store normalized MAC addresses only.
 - Store claim-code hash only.
 - `owner_user_id` is null before claim.
-- `claim_code_used_at` prevents code reuse.
+- Legacy claim-code fields remain only for migration compatibility and are not
+  authoritative for new activations.
 - Placement is an owner-managed display value used to group devices in the
   mobile zone board; it is not a coordinate or reference column.
 
@@ -130,6 +131,18 @@ Rules:
 | updated_at | TIMESTAMP | Required |
 
 Initial codes: `active`, `revoked`.
+
+## `device_activations`
+
+Seller-prepared activation records contain an opaque public reference,
+`device_id`, `intended_user_id`, a SHA-256 hash of a 256-bit random token,
+preparing-operator identifier, failed-attempt count, and issued, expiry,
+revocation, and consumption timestamps. Raw tokens are never stored.
+
+## `device_activation_audits`
+
+Append-only operational audit entries record preparation, revocation,
+activation, and rejection events without storing the raw activation token.
 
 ## `device_user_access`
 

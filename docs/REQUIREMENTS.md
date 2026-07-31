@@ -40,22 +40,24 @@ installation, and per-device delivery tracking prevents duplicate retry sends.
 
 #### FR-DEV-001 — Claim device
 
-The main user submits the normalized MAC address and generated claim code.
+The seller prepares a one-time activation QR for a specific active customer.
+That signed-in customer scans the QR to activate the device.
 
 The system verifies that:
 
 - the device exists;
 - the device status is available;
 - the device has no owner;
-- the claim code matches the stored hash;
-- the claim code has not already been used.
+- the activation token matches the stored hash;
+- the activation is bound to the authenticated user;
+- the activation is not expired, revoked, consumed, or attempt-locked.
 
 On success:
 
 - `owner_user_id` is assigned;
 - device status changes to active;
 - `claimed_at` is recorded;
-- the claim code is invalidated.
+- the activation is consumed.
 
 #### FR-DEV-002 — List owned and shared devices
 
@@ -129,7 +131,8 @@ Use lookup state tables and timestamps instead of fields such as `is_active`.
 ### NFR-004 — Security
 
 - Passwords use Laravel hashing.
-- Claim codes are never stored in plaintext.
+- Activation tokens are high entropy, account-bound, single-use, and stored
+  only as hashes.
 - Sanctum tokens are stored and revoked using Laravel mechanisms.
 - Device operations require authorization.
 - Sensitive operations use rate limiting.

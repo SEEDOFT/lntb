@@ -64,18 +64,30 @@ Return success
 
 ## Device claim
 
-Input:
+Seller preparation:
 
-- `mac_address`
-- `claim_code`
+```text
+Resolve available device and active registered customer
+        ↓
+Lock device and revoke prior unused activation
+        ↓
+Generate 256-bit token and store only its hash
+        ↓
+Bind activation to intended_user_id with expiry
+        ↓
+Generate one-time versioned QR
+```
+
+Customer input:
+
+- `device_ref`
+- `activation_token`
 - optional `name`
 
 Transaction:
 
 ```text
-Normalize MAC address
-        ↓
-Lock device row
+Lock activation and device rows
         ↓
 Confirm device exists
         ↓
@@ -83,9 +95,9 @@ Confirm device status = available
         ↓
 Confirm owner_user_id is null
         ↓
-Confirm claim_code_used_at is null
+Confirm authenticated user matches intended_user_id
         ↓
-Verify submitted code against claim_code_hash
+Verify token hash, expiry, revocation, consumption, and attempt limit
         ↓
 Resolve active device status
         ↓
@@ -93,7 +105,7 @@ Set owner_user_id
         ↓
 Set device_status_id to active
         ↓
-Set claimed_at and claim_code_used_at
+Set claimed_at and consume the activation
         ↓
 Commit
 ```

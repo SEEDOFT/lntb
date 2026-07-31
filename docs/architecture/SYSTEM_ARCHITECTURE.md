@@ -89,12 +89,11 @@ sequenceDiagram
     participant A as Laravel API
     participant DB as Database
 
-    U->>A: POST /devices/claim
-    A->>A: Validate MAC and claim code
-    A->>DB: Lock device row
-    DB-->>A: Device record
-    A->>A: Verify available, unowned, code matches
-    A->>DB: Set owner, active status, claim timestamps
+    U->>A: POST /devices/claim with owner-bound token
+    A->>DB: Lock activation and device rows
+    DB-->>A: Bound activation and device
+    A->>A: Verify intended user, token, expiry, and unused state
+    A->>DB: Set owner, active status, and consume activation
     DB-->>A: Commit
     A-->>U: Claimed device
 ```
@@ -122,7 +121,8 @@ sequenceDiagram
 - Flutter does not receive device claim-code hashes.
 - Flutter does not receive database credentials.
 - Laravel validates all access.
-- Claim codes are hashed.
+- Seller-prepared activation tokens are hashed, expiring, account-bound, and
+  single-use.
 - Google OAuth access tokens are validated server-side through Socialite before identity data is trusted.
 - Device control is never authorized only by UI state.
 

@@ -17,8 +17,8 @@ remain out of scope.
 - First-time installations see three onboarding pages before login.
 - Skip is available before the final onboarding page and hidden on the final
   page.
-- Main navigation contains Home, Devices, Shared Access, History, and Profile.
-- Blue is used for primary actions and green for successful or online states.
+- Main navigation contains Home, Devices, History, and Profile.
+- Emerald is used for primary actions and green for successful or online states.
 - Khmer is the default language and every Phase 1 screen retains English
   translations.
 
@@ -51,7 +51,7 @@ All routes are under `/api/v1` and authenticated routes use Sanctum.
 | GET | `/auth/me` | Load the current account |
 | POST | `/auth/logout` | Revoke the current device installation and session |
 | GET | `/devices` | List owned and actively shared devices |
-| POST | `/devices/claim` | Claim using normalized MAC and claim code |
+| POST | `/devices/claim` | Activate using an owner-bound one-time QR token |
 | GET | `/devices/{id}` | Load authorized device details |
 | GET/POST | `/devices/{id}/controls` | Read or create device commands |
 | POST | `/devices/controls/batch` | Control 1–20 selected authorized devices |
@@ -59,6 +59,8 @@ All routes are under `/api/v1` and authenticated routes use Sanctum.
 | GET/POST | `/devices/{id}/users` | List or grant shared access as owner |
 | DELETE | `/devices/{id}/users/{access}` | Revoke a shared-access record |
 | GET | `/notifications` | List in-app notifications and unread count |
+| GET | `/farms` | List the authenticated user's configured farm |
+| GET | `/farms/{id}/dashboard` | Load farm metrics, devices, warnings, and activity |
 
 Authentication responses add `is_new_account` without removing existing
 fields. Device commands remain limited to `irrigation.start`,
@@ -67,13 +69,15 @@ fields. Device commands remain limited to `irrigation.start`,
 
 ## Architecture
 
-Flutter screens consume typed `AppUser`, `DeviceModel`, `DeviceAccess`, and
-`ControlRecord` objects, plus typed batch-control results. Account operations are isolated in
+Flutter screens consume typed `AppUser`, `DeviceModel`, `DeviceAccess`,
+`FarmDashboard`, `DashboardMetric`, and `ControlRecord` objects, plus typed
+batch-control results. Account operations are isolated in
 `AccountRepository`, while device claiming, access, controls, and history are
-isolated in `DeviceRepository`. Controllers own loading, empty, error, and
-command states; widgets render those states and do not create mock data. A
-control toggle reflects the latest stored command and is not a claim of
-realtime hardware state.
+isolated in `DeviceRepository`; the API-backed farm dashboard is isolated in
+`FarmDashboardRepository`. Controllers own loading, empty, error, and command
+states. Flutter contains no operational fixture or fallback data. A control
+toggle reflects the latest stored API command and is not a claim of realtime
+hardware state.
 
 Laravel keeps validation in Form Requests, authentication behavior in
 `AuthService`, access authorization in device policies, serialized output in
@@ -94,13 +98,15 @@ Supported QR labels contain JSON:
 
 ```json
 {
-  "mac_address": "AA:BB:CC:DD:EE:FF",
-  "claim_code": "ABCD-EFGH-1234",
-  "name": "Smart Farm #1"
+  "v": 1,
+  "device_ref": "123e4567-e89b-12d3-a456-426614174000",
+  "activation_token": "base64url-encoded-256-bit-token",
+  "device_name": "Greenhouse Controller"
 }
 ```
 
-`name` is optional. Invalid QR data leaves manual MAC/code entry available.
+`device_name` is optional. Legacy MAC-address and claim-code payloads are
+rejected.
 
 ## Later-module code
 
