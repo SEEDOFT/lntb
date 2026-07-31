@@ -92,6 +92,10 @@ command returns accepted or failed status per device; successful selections
 clear and failed selections remain for retry. Owners may edit device name and
 placement, while shared users have read-only placement access.
 
+The Home dashboard metric cards open a bottom sheet with the translated state
+description and, for non-normal readings, a warning line. The farm assistant's
+latest report is displayed as seeded; the test dataset seeds it in Khmer.
+
 ## Claim QR Payload
 
 Supported QR labels contain JSON:
