@@ -80,6 +80,15 @@ states. Flutter contains no operational fixture or fallback data. A control
 toggle reflects the latest stored API command and is not a claim of realtime
 hardware state.
 
+Dependencies are constructor-injected. Controllers declare repositories and
+services as constructor parameters; bindings (`MainBinding`,
+`ControlBinding`, `HistoryBinding`, etc.) act as the composition root and pass
+`Get.find<T>()` for each dependency. Controllers and views no longer call
+`Get.find<T>()` at field-initialization time, except for cross-controller
+refresh signals (e.g. `Get.find<DeviceController>().fetchDevices()`) and
+singleton accessors (`LanguageController.to`). The `ApiClient` and repository
+singletons remain permanently registered in `InitialBinding`.
+
 Laravel keeps validation in Form Requests, authentication behavior in
 `AuthService`, access authorization in device policies, serialized output in
 API Resources, and notification transport in queued notification classes.
